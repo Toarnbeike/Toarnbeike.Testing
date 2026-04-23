@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/docs/" />
+  <Folder Name="/solution files/">
+    <File Path="CHANGELOG.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Testing/Testing.csproj" Id="2b273b81-9628-4a0e-a820-ace6f4fb1b03" />
+  </Folder>
+  <Folder Name="/tests/" />
+  <Folder Name="/workflows/">
+    <File Path=".github/workflows/build.yaml" />
+    <File Path=".github/workflows/publish.yaml" />
+    <File Path=".github/workflows/versionCheck.yaml" />
+  </Folder>
+</Solution>

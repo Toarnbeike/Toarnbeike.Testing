@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      DOTNET_VERSION: '10.0.x'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    # - name: Run TUnit Tests
+    #   run: |
+    #     # Run the TUnit test executable and capture output
+    #     dotnet run --project tests/Testing.Tests/Testing.Tests.csproj --configuration Release | tee tunit_output.log
+
+    #     # Fail the job if any tests failed
+    #     grep -q "failed: 0" tunit_output.log || exit 1
+
+    # - name: Upload Test Output
+    #   if: always()
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: tunit-output
+    #     path: tunit_output.log

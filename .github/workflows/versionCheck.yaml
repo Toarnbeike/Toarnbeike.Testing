@@ -1,0 +1,31 @@
+name: Check version bump
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+
+      - name: Get current version from main
+        run: |
+          git fetch origin main
+          MAIN_VERSION=$(git show origin/main:Directory.Build.props | grep '<Version>' | head -n1 | sed -E 's/.*<Version>(.*)<\/Version>.*/\1/')
+          echo "MAIN_VERSION=$MAIN_VERSION" >> $GITHUB_ENV
+
+      - name: Get version from PR branch
+        run: |
+          PR_VERSION=$(grep '<Version>' Directory.Build.props | head -n1 | sed -E 's/.*<Version>(.*)<\/Version>.*/\1/')
+          echo "PR_VERSION=$PR_VERSION" >> $GITHUB_ENV
+
+      - name: Fail if version not incremented
+        run: |
+          if [ "${PR_VERSION}" = "${MAIN_VERSION}" ]; then
+            echo "Error: Version must be incremented in Directory.Build.props"
+            exit 1
+          fi
