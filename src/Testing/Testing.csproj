@@ -3,6 +3,11 @@
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
 		<RootNamespace>Toarnbeike.Testing</RootNamespace>
+		<AssemblyName>Toarnbeike.Testing</AssemblyName>
+
+		<PackageId>Toarnbeike.Testing</PackageId>
+		<Description>Utility library for Toarnbeike test projects</Description>
+		<PackageTags>Toarnbeike testing utility library</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -10,4 +15,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="" Visible="false" />
+	</ItemGroup>
 </Project>
